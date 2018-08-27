@@ -24,21 +24,17 @@ public class SentimentService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSentiment(@Context UriInfo ui, @Context HttpServletRequest req, SentimentRequest sr) {
+    public Sentiment getSentiment(@Context UriInfo ui, @Context HttpServletRequest req, SentimentRequest sr) {
 
         String apiKey = ui.getQueryParameters().getFirst("api-key");
-        if(apiKey == null || !apiKey.equals("Happy!!!")) {
+        if (apiKey == null || !apiKey.equals("Happy!!!")) {
             throw new NotAuthorizedException("Sorry :(");
         }
 
-        log.log(Level.INFO, "SentimentService.getSentiment(): sentence={0}", new Object[] {sr.getSentence()});
+        log.log(Level.INFO, "SentimentService.getSentiment(): sentence={0}", new Object[]{sr.getSentence()});
         int sentiment = analyser.findSentiment(sr.getSentence());
         log.log(Level.INFO, "Returning {0}", sentiment);
-        return Response
-                .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .entity(new Sentiment(sentiment))
-                .build();
+        return new Sentiment(sentiment);
     }
 }
 
