@@ -3,15 +3,15 @@ $(document).ready(function() {
     $("#analyzeForm").submit(function(event) {
         event.preventDefault();
         $.ajax({
-            url: 'webresources/sentiment',
+            url: 'webresources/sentiment?api-key=Happy!!!',
             type: 'POST',
-            data: $("#inputText").val(),
-            contentType: 'text/plain; charset=utf-8',
+            data: JSON.stringify({sentence: $("#inputText").val()}),
+            contentType: 'application/json',
             dataType: 'json',
             complete: function(xhr) {
                 switch (xhr.status) {
                     case 200:
-                        $("#emoticon").attr("src", "images/sentiment" + xhr.responseText + ".png");
+                        $("#emoticon").attr("src", "images/sentiment" + xhr.responseJSON.value + ".png");
                         $("#emoticon").removeClass("hide");
                         break;
                     default:
