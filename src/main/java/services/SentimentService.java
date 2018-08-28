@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,5 +35,6 @@ public class SentimentService {
         log.log(Level.INFO, "Returning {0}", sentiment);
         return new Sentiment(sentiment);
     }
+
 }
 

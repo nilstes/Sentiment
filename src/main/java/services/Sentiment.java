@@ -17,4 +17,5 @@ public class Sentiment {
     public void setValue(int value) {
         this.value = value;
     }
+
 }
