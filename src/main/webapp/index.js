@@ -3,7 +3,7 @@ $(document).ready(function() {
     $("#analyzeForm").submit(function(event) {
         event.preventDefault();
         $.ajax({
-            url: 'webresources/sentiment?api-key=Happy!!!',
+            url: 'webresources/sentiment/log?api-key=Happy!!!',
             type: 'POST',
             data: JSON.stringify({sentence: $("#inputText").val()}),
             contentType: 'application/json',
