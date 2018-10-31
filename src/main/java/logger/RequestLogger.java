@@ -39,14 +39,14 @@ public class RequestLogger {
         if(esWriter != null) {
             String ip = getClientIpAddr(request);
             Location location = lookupService.getLocation(ip);
+            Message msg = new Message(message, new Date(), sentiment);
             if(location != null) {
                 log.log(Level.INFO, "Location for ip {0}: lat={1}, lon={2}", new Object[]{ip, location.latitude, location.longitude});
-                Message msg = new Message(message, new Date(), sentiment);
                 msg.setLocation(location.latitude, location.longitude);
-                esWriter.addStatus(msg);
             } else {
                 log.log(Level.INFO, "Location for ip {0} not found", ip);                
             }
+            esWriter.addStatus(msg);
         }
     }
     
