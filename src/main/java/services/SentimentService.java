@@ -21,7 +21,6 @@ public class SentimentService {
     private static final Logger log = Logger.getLogger(SentimentService.class.getName());
 
     private static Analyser analyser = new Analyser();
-    private RequestLogger requestLogger = new RequestLogger();
 
     @POST
     @Consumes("text/plain")
@@ -47,6 +46,7 @@ public class SentimentService {
 
         log.log(Level.INFO, "SentimentService.getSentimentAndLog(): sentence={0}", new Object[]{sr.getSentence()});
         int sentiment = analyser.findSentiment(sr.getSentence());
+        RequestLogger requestLogger = new RequestLogger();
         requestLogger.logRequest(sr.getSentence(), sentiment, req);
         log.log(Level.INFO, "Returning {0}", sentiment);
         return new Sentiment(sentiment);
